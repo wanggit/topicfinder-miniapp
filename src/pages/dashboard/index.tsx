@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react'
 import { View, Text } from '@tarojs/components'
-import Taro from '@tarojs/taro'
+import { authenticatedFetch } from '../../utils/auth'
 
 export default function Dashboard() {
   const [profile, setProfile] = useState<any>({})
-  const BASE = 'https://api.topicfinder.example.com'
 
   useEffect(() => {
-    const token = Taro.getStorageSync('token')
-    fetch(`${BASE}/api/profile`, { headers: { Authorization: `Bearer ${token}` } })
+    authenticatedFetch('/api/profile')
       .then(r => r.json()).then(setProfile).catch(() => {})
   }, [])
 
@@ -21,7 +19,7 @@ export default function Dashboard() {
       </View>
       <View style={{ background: '#fff', borderRadius: 12, padding: 16 }}>
         <Text style={{ fontWeight: 600, marginBottom: 12, display: 'block' }}>学习状态</Text>
-        <Text style={{ color: '#666' }}>试用期: {profile.trial_expires_at ? new Date(profile.trial_expires_at).toLocaleDateString() : '加载中...'}</Text>
+        <Text style={{ color: '#666' }}>试用至 {profile.trial_expires_at ? new Date(profile.trial_expires_at).toLocaleDateString() : '加载中...'}</Text>
       </View>
     </View>
   )

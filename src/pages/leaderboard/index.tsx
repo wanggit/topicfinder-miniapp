@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
 import { View, Text } from '@tarojs/components'
-import Taro from '@tarojs/taro'
 
 export default function Leaderboard() {
   const [list, setList] = useState<any[]>([])
-  const BASE = 'https://api.topicfinder.example.com'
+  const BASE = 'http://localhost:3001'
 
   useEffect(() => {
     fetch(`${BASE}/api/leaderboard`).then(r => r.json()).then(setList).catch(() => {})

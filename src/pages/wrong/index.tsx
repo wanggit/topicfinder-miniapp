@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import { View, Text } from '@tarojs/components'
 import Taro from '@tarojs/taro'
+import { authenticatedFetch } from '../../utils/auth'
 
 export default function Wrong() {
   const [items, setItems] = useState<any[]>([])
-  const BASE = 'https://api.topicfinder.example.com'
+  const BASE = 'http://localhost:3001'
 
   useEffect(() => {
-    const token = Taro.getStorageSync('token')
-    fetch(`${BASE}/api/wrong-notes`, { headers: { Authorization: `Bearer ${token}` } })
+    authenticatedFetch('/api/wrong-notes')
       .then(r => r.json()).then(setItems).catch(() => {})
   }, [])
 
