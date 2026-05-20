@@ -2,6 +2,7 @@ export default {
   pages: [
     'pages/dashboard/index',
     'pages/learning/index',
+    'pages/learning/answer',
     'pages/report/index',
     'pages/wrong/index',
     'pages/leaderboard/index',
