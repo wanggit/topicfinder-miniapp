@@ -17,6 +17,9 @@ export default function Answer() {
   const [results, setResults] = useState<Record<number, { isCorrect: boolean; explanation: string }>>({})
   const [submitting, setSubmitting] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [showHint, setShowHint] = useState(false)
+  const [hintMsg, setHintMsg] = useState('')
+  const [hintReply, setHintReply] = useState('')
 
   const BASE = 'https://api.topicfinder.example.com'
 
@@ -102,6 +105,35 @@ export default function Answer() {
         <View style={{ padding: 20, borderRadius: 12, background: result.isCorrect ? '#f6ffed' : '#fff2f0', border: `2px solid ${result.isCorrect ? '#52c41a' : '#ff4d4f'}`, marginBottom: 16 }}>
           <Text style={{ fontSize: 24, display: 'block', textAlign: 'center', marginBottom: 8 }}>{result.isCorrect ? '✅ 回答正确！' : '❌ 再想想～'}</Text>
           <Text style={{ fontSize: 15, color: '#666', lineHeight: 1.5 }}>{result.explanation}</Text>
+          {!result.isCorrect && (
+            <View style={{ marginTop: 12, textAlign: 'center' }}>
+              <Button size='mini' onClick={() => setShowHint(true)}
+                style={{ background: '#fff', color: '#764ba2', border: '1px solid #764ba2', borderRadius: 8 }}>
+                💡 请求提示
+              </Button>
+            </View>
+          )}
+        </View>
+      )}
+
+      {/* Tutoring dialogue */}
+      {showHint && (
+        <View style={{ background: '#f9f0ff', borderRadius: 12, padding: 16, marginBottom: 16 }}>
+          <Text style={{ fontWeight: 600, marginBottom: 8, display: 'block' }}>辅导对话</Text>
+          {hintReply && (
+            <View style={{ background: '#fff', borderRadius: 8, padding: 12, marginBottom: 8 }}>
+              <Text style={{ fontSize: 14, color: '#333' }}>{hintReply}</Text>
+            </View>
+          )}
+          <View style={{ display: 'flex', gap: 8 }}>
+            <input placeholder='输入你的问题...' value={hintMsg}
+              onInput={e => setHintMsg(e.detail.value)}
+              style={{ flex: 1, border: '1px solid #ddd', borderRadius: 8, padding: '8px 12px', fontSize: 14 }} />
+            <Button size='mini' onClick={() => { setHintReply('这是一个示例提示回复（需WebSocket对接）'); setHintMsg(''); }}
+              style={{ background: '#764ba2', color: '#fff', borderRadius: 8 }}>
+              发送
+            </Button>
+          </View>
         </View>
       )}
 
