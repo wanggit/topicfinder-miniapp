@@ -1,0 +1,40 @@
+{
+  "name": "topicfinder-miniapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:weapp": "taro build --type weapp --watch",
+    "dev:h5": "taro build --type h5 --watch",
+    "build:weapp": "taro build --type weapp",
+    "build:h5": "taro build --type h5",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wanggit/topicfinder-miniapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wanggit/topicfinder-miniapp/issues"
+  },
+  "homepage": "https://github.com/wanggit/topicfinder-miniapp#readme",
+  "dependencies": {
+    "@tarojs/components": "^4.2.0",
+    "@tarojs/plugin-platform-h5": "^4.2.0",
+    "@tarojs/plugin-platform-weapp": "^4.2.0",
+    "@tarojs/react": "^4.2.0",
+    "@tarojs/runtime": "^4.2.0",
+    "@tarojs/taro": "^4.2.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "@tarojs/cli": "^4.2.0",
+    "babel-preset-taro": "^4.2.0",
+    "vitest": "^4.1.6"
+  }
+}
